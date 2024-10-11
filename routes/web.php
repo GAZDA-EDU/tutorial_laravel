@@ -24,4 +24,8 @@ Route::get('/user', function () {
 
 Route::get('index', [TestController::class, 'index']);
 
-Route::get('show/{id}', [TestController::class, 'show']);
+Route::get('show/{id?}', [TestController::class, 'show']);
+
+Route::post('posts', [TestController::class, 'store']);
+
+Route::get('posts/create', [TestController::class, 'create']);

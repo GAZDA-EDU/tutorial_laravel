@@ -16,6 +16,17 @@ class TestController extends Controller
 
     public function show($id)
     {
-        return $id;
+        $posts = DB::table('posts')->where('id', $id)->first();
+        return $posts;
+    }
+
+    public function store(Request $request)
+    {
+        return $request->title;
+    }
+
+    public function create()
+    {
+        return view('create');
     }
 }
