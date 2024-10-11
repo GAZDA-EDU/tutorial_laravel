@@ -23,3 +23,5 @@ Route::get('/user', function () {
 });
 
 Route::get('index', [TestController::class, 'index']);
+
+Route::get('show/{id}', [TestController::class, 'show']);

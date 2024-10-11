@@ -13,4 +13,9 @@ class TestController extends Controller
 
         return view('test', compact('posts'));
     }
+
+    public function show($id)
+    {
+        return $id;
+    }
 }
