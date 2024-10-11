@@ -22,7 +22,12 @@ class TestController extends Controller
 
     public function store(Request $request)
     {
-        return $request->title;
+        DB::table('posts')->insert([
+            'title'=>$request->title,
+            'body'=>$request->body
+        ]);
+        $posts = DB::table('posts')->get();
+        return $posts;
     }
 
     public function create()
