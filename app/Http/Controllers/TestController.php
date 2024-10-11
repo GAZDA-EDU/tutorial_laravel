@@ -9,7 +9,9 @@ class TestController extends Controller
 {
     public function index()
     {
-        $posts = DB::table('posts')->where('body','=','egerg')->get();
-        return $posts;
+        $name = 'code with george';
+        $isAdmin = false;
+
+        return view('test', compact('name', 'isAdmin'));
     }
 }
