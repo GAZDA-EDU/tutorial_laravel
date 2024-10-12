@@ -34,4 +34,11 @@ class TestController extends Controller
     {
         return view('create');
     }
+
+    public function edit($id)
+    {
+        $post = DB::table('posts')->where('id', $id)->first();
+
+        return view('edit',compact('post'));
+    }
 }
