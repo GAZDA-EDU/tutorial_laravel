@@ -10,10 +10,15 @@ use App\Models\User;
 
 class TestController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-    $user = User::with('profile')->find(1);
-    return $user;
+    $user = User::find(1);
+
+    $post = new Post();
+    $post->title = $request->title;
+    $post->body = $request->body;
+
+    $user->posts()->save($post);
     }
 
     public function show($id)
