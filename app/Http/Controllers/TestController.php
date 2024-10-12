@@ -4,28 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Post;
 
 class TestController extends Controller
 {
     public function index()
     {
-        $posts = DB::table('posts')->get();
+        $posts = Post::all();
 
         return view('test', compact('posts'));
     }
 
     public function show($id)
     {
-        $posts = DB::table('posts')->where('id', $id)->first();
-        return $posts;
+        $post = Post::find($id);
+
+        return $post;
     }
 
     public function store(Request $request)
     {
-        DB::table('posts')->insert([
-            'title'=>$request->title,
-            'body'=>$request->body
-        ]);
+        $post = new Post();
+
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->save();
+
         $posts = DB::table('posts')->get();
         return $posts;
     }
@@ -37,27 +41,25 @@ class TestController extends Controller
 
     public function edit($id)
     {
-        $post = DB::table('posts')->where('id', $id)->first();
+        $post = Post::find($id);
 
         return view('edit',compact('post'));
     }
 
     public function update($id, Request $request)
     {
-        DB::table('posts')
-        ->where('id', $id)
-        ->update([
-            'title' => $request->title,
-            'body' => $request->body
-        ]);
+        $post = Post::find($id);
+
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->save();
+
         return 'post is updated';
     }
 
     public function destroy($id)
     {
-        DB::table('posts')
-        ->where('id', $id)
-        ->delete();
+        Post::find($id)->delete();
 
         return 'post is deleted';
     }
