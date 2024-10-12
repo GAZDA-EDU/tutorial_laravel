@@ -12,8 +12,7 @@ class TestController extends Controller
 {
     public function index()
     {
-    $profile = Profile::find(1);
-    $user = $profile->user;
+    $user = User::with('profile')->find(1);
     return $user;
     }
 
