@@ -41,4 +41,15 @@ class TestController extends Controller
 
         return view('edit',compact('post'));
     }
+
+    public function update($id, Request $request)
+    {
+        DB::table('posts')
+        ->where('id', $id)
+        ->update([
+            'title' => $request->title,
+            'body' => $request->body
+        ]);
+        return 'post is updated';
+    }
 }
