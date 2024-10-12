@@ -52,4 +52,13 @@ class TestController extends Controller
         ]);
         return 'post is updated';
     }
+
+    public function destroy($id)
+    {
+        DB::table('posts')
+        ->where('id', $id)
+        ->delete();
+
+        return 'post is deleted';
+    }
 }

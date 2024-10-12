@@ -33,3 +33,5 @@ Route::get('posts/create', [TestController::class, 'create']);
 Route::get('edit_post/{id}', [TestController::class, 'edit']);
 
 Route::post('update_post/{id}', [TestController::class, 'update']);
+
+Route::get('delete_post/{id}', [TestController::class, 'destroy']);
