@@ -5,20 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
-use App\Models\Profile;
 use App\Models\User;
 
 class TestController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
     $user = User::find(1);
-
-    $post = new Post();
-    $post->title = $request->title;
-    $post->body = $request->body;
-
-    $user->posts()->save($post);
+    $profile = $user->profile;
+    return $profile;
     }
 
     public function show($id)
