@@ -12,8 +12,8 @@ class AuthTokenControlller extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
-            'email' => 'required|string|max:100|uniqe:users',
-            'password' => 'required|string|confirmed|min:6',
+            'email' => 'required|string|max:100|unique:users',
+            'password' => 'required|string|min:6',
         ]);
         if($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
@@ -31,7 +31,7 @@ class AuthTokenControlller extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'phone_number' => 'required',
+            'email' => 'required',
             'password' => 'required|string|min:6',
         ]);
         if ($validator->fails()) {
