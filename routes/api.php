@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthTokenControlller;
 use App\Http\Controllers\TestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return 'hello from the api route';
-});
+Route::post('login', [AuthTokenControlller::class, 'login']);
+Route::post('register', [AuthTokenControlller::class, 'register']);
 
-Route::get('posts', [TestController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
