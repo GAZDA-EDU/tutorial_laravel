@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthControlller;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +36,9 @@ Route::get('edit_post/{id}', [TestController::class, 'edit']);
 Route::post('update_post/{id}', [TestController::class, 'update']);
 
 Route::get('delete_post/{id}', [TestController::class, 'destroy']);
+
+Route::post('login', [AuthControlller::class, 'login']);
+Route::post('register', [AuthControlller::class, 'register']);
+
+Route::get('login_form', [AuthControlller::class, 'login_form']);
+Route::get('register_form', [AuthControlller::class, 'register_form']);
