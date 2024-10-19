@@ -26,10 +26,15 @@ class TestController extends Controller
 
     public function store(Request $request)
     {
+        $validated_data = $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required'
+        ]);
+
         $post = new Post();
 
-        $post->title = $request->title;
-        $post->body = $request->body;
+        $post->title = $validated_data['title'];
+        $post->body = $validated_data['body'];
         $post->save();
 
         $posts = DB::table('posts')->get();
