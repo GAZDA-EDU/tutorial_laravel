@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 
 class TestController extends Controller
 {
@@ -60,8 +61,13 @@ class TestController extends Controller
 
     public function destroy($id)
     {
-        Post::find($id)->delete();
+        $post = Post::find($id);
 
-        return 'post is deleted';
+        if(Gate::allows('delete-post', $post)){
+
+            $post->delete();
+
+            return 'post is deleted';
+        }
     }
 }
