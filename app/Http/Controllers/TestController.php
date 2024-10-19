@@ -63,11 +63,11 @@ class TestController extends Controller
     {
         $post = Post::find($id);
 
-        if(Gate::allows('delete-post', $post)){
+        $this->authorize('delete', $post);
 
-            $post->delete();
+        $post->delete();
 
-            return 'post is deleted';
-        }
+        return 'post is deleted';
+
     }
 }
