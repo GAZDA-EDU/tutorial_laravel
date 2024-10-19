@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostStoreRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
@@ -24,17 +25,12 @@ class TestController extends Controller
         return $post;
     }
 
-    public function store(Request $request)
+    public function store(PostStoreRequest $request)
     {
-        $validated_data = $request->validate([
-            'title' => 'required|max:255',
-            'body' => 'required'
-        ]);
-
         $post = new Post();
 
-        $post->title = $validated_data['title'];
-        $post->body = $validated_data['body'];
+        $post->title = $request->title;
+        $post->body = $request->body;
         $post->save();
 
         $posts = DB::table('posts')->get();
